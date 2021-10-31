@@ -4,7 +4,7 @@ const cors = require('cors');
 
 require('dotenv').config();
 const app = express();
-const port = 4000;
+const port = process.env.PORT || 4000;
 
 // Middleware
 app.use(cors());
@@ -34,6 +34,12 @@ async function run(){
             const destination = req.body;
             console.log(destination);
             const result = await destinationCollection.insertOne(destination);
+            console.log(result)
+            res.json(result);
+        })
+        app.post('/allBookings', async(req, res) => {
+            const booking = req.body;
+            const result = await bookingCollection.insertOne(booking);
             console.log(result)
             res.json(result);
         })
